@@ -1,12 +1,35 @@
 #include <iostream>
 #include <string>
 
-int main(int argc, char **argv) {
-	std::cout << "Number of arguments: " << argc << std::endl;
+void	print_str(std::string str)
+{
+	size_t	i;
 
-	for (int i = 0; i < argc; ++i) {
-		std::cout << "Arg " << i << ": " << argv[i] << std::endl;
+	i = 0;
+	while (str[i])
+	{
+		std::cout << (char)std::toupper(str[i]);
+		i++;
 	}
+}
 
-	return 0;
+int	main(int ac, char **av)
+{
+	int	i;
+
+	if (ac < 2)
+	{
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
+		return (0);
+	}
+	i = 1;
+	while (i < ac)
+	{
+		print_str(av[i]);
+		if (i < ac - 1)
+			std::cout << ' ';
+		i++;
+	}
+	std::cout << std::endl;
+	return (0);
 }
