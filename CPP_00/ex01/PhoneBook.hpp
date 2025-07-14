@@ -1,5 +1,6 @@
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
+
 #include "./Contact.hpp"
 
 class PhoneBook
@@ -9,7 +10,12 @@ class PhoneBook
 		int		len;
 	public:
 		PhoneBook();
-		Contact *getContacts() const;
+		
+		int		getContactsLen() const;
+		const Contact *getContacts() const;
+
+		void	updateContactsLen();
+		const Contact *setContact(int index);
 };
 
 #endif
