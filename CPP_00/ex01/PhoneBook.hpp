@@ -19,7 +19,9 @@ class PhoneBook
 		void	setContact(int index, Contact contact);
 
 		void	addContact();
-		void	searchContact(int index);
+		void	searchContact();
+
+		int		validate_index();
 };
 
 #endif

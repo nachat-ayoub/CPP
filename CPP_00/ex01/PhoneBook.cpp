@@ -72,9 +72,54 @@ void	PhoneBook::addContact() {
 	}
 	contact.setDarkestSecret(val);
 
-	contact.print();
+	// contact.print();
+	setContact(getContactsLen(), contact);
+	updateContactsLen();
 }
 
-void	PhoneBook::searchContact(int index) {
-	(void)index;
+int		PhoneBook::validate_index()
+{
+	std::string	val;
+	int			index;
+
+	std::getline(std::cin, val);
+	if (val.length() != 1 || !std::isdigit(static_cast<unsigned char>(val[0])))
+		return (-1);
+	index = val[0] - '0';
+	if (index >= 0 && index <= 7)
+		return (index);
+	else
+		return (-1);
+}
+
+void	PhoneBook::searchContact() {
+
+	std::cout << "[x] Type an index to search for the contact!" << std::endl;
+	int index = validate_index();
+
+	if (index == -1)
+	{
+		std::cout << "==============[ Invalid Index ]===========" << std::endl;
+		return ;
+	}
+
+	const Contact *contacts = getContacts();
+	int len = getContactsLen();
+	if (len == 0)
+		std::cout << "==============[ No Contacts ]===========" << std::endl;
+
+	for (int i = 0; i < len; i++) {
+		std::cout << "============================================";
+		contacts[i].print();
+		std::cout << "============================================" << std::endl << std::endl;
+	}
+
+	if (index < len)
+	{
+		std::cout << "--------------------------------------------";
+		contacts[index].print();
+		std::cout << "--------------------------------------------" << std::endl << std::endl;
+	}
+	else
+		std::cout << "==============[ Contact not found ]===========" << std::endl;
 }

@@ -12,7 +12,7 @@ int main()
 		if (input == "ADD") {
 			phoneBook.addContact();
 		} else if (input == "SEARCH") {
-			// phoneBook.searchContact();
+			phoneBook.searchContact();
 		} else if (input == "EXIT")
 			break ;
 	}
