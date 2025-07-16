@@ -2,7 +2,18 @@
 
 int main()
 {
-	PhoneBook phoneBook;
-	const Contact *contact = phoneBook.getContacts();
-	std::cout << "FirstName: " << contact[0].getFirstName() << std::endl;
+	PhoneBook	phoneBook;
+	std::string	input;
+
+	while (true)
+	{
+		std::cout << "type a command ADD, SEARCH or EXIT" << std::endl;
+		std::getline(std::cin, input);
+		if (input == "ADD") {
+			phoneBook.addContact();
+		} else if (input == "SEARCH") {
+			// phoneBook.searchContact();
+		} else if (input == "EXIT")
+			break ;
+	}
 }

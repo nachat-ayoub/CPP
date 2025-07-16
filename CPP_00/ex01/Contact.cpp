@@ -33,3 +33,30 @@ void Contact::setPhoneNumber(const std::string& newPhoneNumber) {
 void Contact::setDarkestSecret(const std::string& newDarkestSecret) {
 	darkestSecret = newDarkestSecret;
 }
+
+
+bool	Contact::validate_str(const std::string& str) const
+{
+	bool hasSpacesOnly = true;
+	if (str.empty())
+		return (false);
+	for (size_t i = 0; i < str.length(); ++i) {
+		unsigned char c = static_cast<unsigned char>(str[i]);
+		if (!std::isprint(c))
+			return (false);
+		if (!std::isspace(c))
+			hasSpacesOnly = false;
+	}
+	if (hasSpacesOnly)
+		return (false);
+	return (true);
+}
+
+
+void Contact::print() const {
+	std::cout << "First Name     : " << firstName << std::endl;
+	std::cout << "Last Name      : " << lastName << std::endl;
+	std::cout << "Nickname       : " << nickName << std::endl;
+	std::cout << "Phone Number   : " << phoneNumber << std::endl;
+	std::cout << "Darkest Secret : " << darkestSecret << std::endl;
+}

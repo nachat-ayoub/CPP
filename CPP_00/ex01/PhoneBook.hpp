@@ -15,7 +15,11 @@ class PhoneBook
 		const Contact *getContacts() const;
 
 		void	updateContactsLen();
-		const Contact *setContact(int index);
+		void	setContactsLen(int newLen);
+		void	setContact(int index, Contact contact);
+
+		void	addContact();
+		void	searchContact(int index);
 };
 
 #endif

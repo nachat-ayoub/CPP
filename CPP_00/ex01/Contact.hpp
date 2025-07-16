@@ -24,6 +24,9 @@ class Contact
 		void setNickName(const std::string& nickName);
 		void setPhoneNumber(const std::string& phoneNumber);
 		void setDarkestSecret(const std::string& darkestSecret);
+
+		bool	validate_str(const std::string& str) const;
+		void 	print() const;
 };
 
 #endif
