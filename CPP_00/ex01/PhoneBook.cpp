@@ -23,12 +23,21 @@ void	PhoneBook::setContact(int i, Contact contact) {
 	contacts[i] = contact;
 }
 
+
+void	PhoneBook::readLine(std::string val) {
+	if (!std::getline(std::cin, val))
+	{
+		std::cout << std::endl << "EOF detected. Exiting.\n" << std::endl;
+		exit(1);
+	}
+}
+
 void	PhoneBook::addContact() {
 	Contact contact;
 	std::string val;
 
 	std::cout << "Type firstname: " << std::endl;
-	std::getline(std::cin, val);
+	readLine(val);
 	if (!contact.validate_str(val))
 	{
 		std::cout << "Invalid value" << std::endl;
@@ -37,7 +46,7 @@ void	PhoneBook::addContact() {
 	contact.setFirstName(val);
 
 	std::cout << "Type lastname: " << std::endl;
-	std::getline(std::cin, val);
+	readLine(val);
 	if (!contact.validate_str(val))
 	{
 		std::cout << "Invalid value" << std::endl;
@@ -46,7 +55,7 @@ void	PhoneBook::addContact() {
 	contact.setLastName(val);
 
 	std::cout << "Type nickname: " << std::endl;
-	std::getline(std::cin, val);
+	readLine(val);
 	if (!contact.validate_str(val))
 	{
 		std::cout << "Invalid value" << std::endl;
@@ -55,7 +64,7 @@ void	PhoneBook::addContact() {
 	contact.setNickName(val);
 
 	std::cout << "Type phone number: " << std::endl;
-	std::getline(std::cin, val);
+	readLine(val);
 	if (!contact.validate_str(val))
 	{
 		std::cout << "Invalid value" << std::endl;
@@ -64,7 +73,7 @@ void	PhoneBook::addContact() {
 	contact.setPhoneNumber(val);
 
 	std::cout << "Type your darkest secret: " << std::endl;
-	std::getline(std::cin, val);
+	readLine(val);
 	if (!contact.validate_str(val))
 	{
 		std::cout << "Invalid value" << std::endl;
@@ -72,17 +81,15 @@ void	PhoneBook::addContact() {
 	}
 	contact.setDarkestSecret(val);
 
-	// contact.print();
 	setContact(getContactsLen(), contact);
 	updateContactsLen();
 }
 
-int		PhoneBook::validate_index()
-{
+int		PhoneBook::validate_index() {
 	std::string	val;
 	int			index;
 
-	std::getline(std::cin, val);
+	readLine(val);
 	if (val.length() != 1 || !std::isdigit(static_cast<unsigned char>(val[0])))
 		return (-1);
 	index = val[0] - '0';
@@ -92,34 +99,54 @@ int		PhoneBook::validate_index()
 		return (-1);
 }
 
+void PhoneBook::printCell(const std::string& str) const {
+	std::string printed_str;
+	if (str.length() > 10)
+		printed_str = str.substr(0, 9) + ".";
+	else 
+		printed_str = str;
+	std::cout << std::setw(10) << printed_str << "|";
+}
+
+
+void PhoneBook::printContact(Contact contact, int index) const {
+	printCell(std::to_string(index));
+	printCell(contact.getFirstName());
+	printCell(contact.getFirstName());
+	printCell(contact.getLastName());
+	printCell(contact.getNickName());
+}
+
+
 void	PhoneBook::searchContact() {
+	const Contact *contacts = getContacts();
+	printCell("Index");
+	printCell("FirstName");
+	printCell("LastName");
+	printCell("NickName");
+	std::cout << std::endl;
 
-	std::cout << "[x] Type an index to search for the contact!" << std::endl;
-	int index = validate_index();
-
-	if (index == -1)
+	int len = getContactsLen();
+	if (len > 0)
 	{
-		std::cout << "==============[ Invalid Index ]===========" << std::endl;
+		for (int i = 0; i < len; i++) {
+			printContact(contacts[i], i);
+			std::cout  << std::endl << std::string(43, '-') << std::endl;
+		}
+	}
+
+	std::cout << std::endl << "Enter an index: ";
+	int index = validate_index();
+	if (index == -1) {
+		std::cout << "==============[ Invalid Index ]===========" << std::endl << std::endl;
 		return ;
 	}
 
-	const Contact *contacts = getContacts();
-	int len = getContactsLen();
-	if (len == 0)
-		std::cout << "==============[ No Contacts ]===========" << std::endl;
-
-	for (int i = 0; i < len; i++) {
-		std::cout << "============================================";
-		contacts[i].print();
-		std::cout << "============================================" << std::endl << std::endl;
-	}
-
-	if (index < len)
-	{
-		std::cout << "--------------------------------------------";
+	if (index < len) {
+		std::cout << std::endl;
 		contacts[index].print();
-		std::cout << "--------------------------------------------" << std::endl << std::endl;
+		std::cout << std::endl;
 	}
 	else
-		std::cout << "==============[ Contact not found ]===========" << std::endl;
+		std::cout << "==========[ Contact not found ]==========" << std::endl << std::endl;
 }

@@ -54,9 +54,9 @@ bool	Contact::validate_str(const std::string& str) const
 
 
 void Contact::print() const {
-	std::cout << "First Name     : " << firstName << std::endl;
-	std::cout << "Last Name      : " << lastName << std::endl;
-	std::cout << "Nickname       : " << nickName << std::endl;
-	std::cout << "Phone Number   : " << phoneNumber << std::endl;
-	std::cout << "Darkest Secret : " << darkestSecret << std::endl;
+	std::cout << firstName << std::endl;
+	std::cout << lastName << std::endl;
+	std::cout << nickName << std::endl;
+	std::cout << phoneNumber << std::endl;
+	std::cout << darkestSecret << std::endl;
 }

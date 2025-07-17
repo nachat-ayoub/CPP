@@ -2,6 +2,7 @@
 #define PHONEBOOK_HPP
 
 #include "./Contact.hpp"
+#include <iomanip>
 
 class PhoneBook
 {
@@ -21,7 +22,11 @@ class PhoneBook
 		void	addContact();
 		void	searchContact();
 
+		void	readLine(std::string val);
 		int		validate_index();
+		void	printCell(const std::string& str) const;
+		void	printContact(Contact contact, int index) const;
+
 };
 
 #endif
