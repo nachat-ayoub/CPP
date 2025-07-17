@@ -2,10 +2,14 @@
 
 PhoneBook::PhoneBook() {
 	len = 0;
+	idx = 0;
 }
 
 int PhoneBook::getContactsLen() const {
 	return len;
+}
+int PhoneBook::getIdx() const {
+	return idx;
 }
 
 const Contact *PhoneBook::getContacts() const {
@@ -15,8 +19,13 @@ const Contact *PhoneBook::getContacts() const {
 void	PhoneBook::setContactsLen(int newLen) {
 	len = newLen;
 }
+void	PhoneBook::setIdx(int newIndex) {
+	idx = newIndex;
+}
 void	PhoneBook::updateContactsLen() {
-	len = (len + 1) % 8;
+	if (len < 8)
+		len++;
+	idx = (idx + 1) % 8;
 }
 
 void	PhoneBook::setContact(int i, Contact contact) {
@@ -24,7 +33,7 @@ void	PhoneBook::setContact(int i, Contact contact) {
 }
 
 
-void	PhoneBook::readLine(std::string val) {
+void	PhoneBook::readLine(std::string& val) {
 	if (!std::getline(std::cin, val))
 	{
 		std::cout << std::endl << "EOF detected. Exiting.\n" << std::endl;
@@ -40,7 +49,7 @@ void	PhoneBook::addContact() {
 	readLine(val);
 	if (!contact.validate_str(val))
 	{
-		std::cout << "Invalid value" << std::endl;
+		std::cout << "Invalid value" << std::endl << std::endl;
 		return ;
 	}
 	contact.setFirstName(val);
@@ -81,7 +90,7 @@ void	PhoneBook::addContact() {
 	}
 	contact.setDarkestSecret(val);
 
-	setContact(getContactsLen(), contact);
+	setContact(getIdx(), contact);
 	updateContactsLen();
 }
 
@@ -112,7 +121,6 @@ void PhoneBook::printCell(const std::string& str) const {
 void PhoneBook::printContact(Contact contact, int index) const {
 	printCell(std::to_string(index));
 	printCell(contact.getFirstName());
-	printCell(contact.getFirstName());
 	printCell(contact.getLastName());
 	printCell(contact.getNickName());
 }
@@ -124,14 +132,14 @@ void	PhoneBook::searchContact() {
 	printCell("FirstName");
 	printCell("LastName");
 	printCell("NickName");
-	std::cout << std::endl;
+	std::cout <<  std::endl;
 
 	int len = getContactsLen();
 	if (len > 0)
 	{
 		for (int i = 0; i < len; i++) {
 			printContact(contacts[i], i);
-			std::cout  << std::endl << std::string(43, '-') << std::endl;
+			std::cout << std::endl;
 		}
 	}
 
@@ -150,3 +158,36 @@ void	PhoneBook::searchContact() {
 	else
 		std::cout << "==========[ Contact not found ]==========" << std::endl << std::endl;
 }
+
+
+void PhoneBook::seedData() {
+    Contact newContact;
+
+    // Example data for 7 contacts
+    std::string firstNames[7] = {"Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace"};
+    std::string lastNames[7] = {"Smith", "Johnson", "Brown", "Williams", "Jones", "Miller", "Davis"};
+    std::string nickNames[7] = {"Ally", "Bobby", "Chuck", "Dave", "Evie", "Franky", "Gray"};
+    std::string phoneNumbers[7] = {"1234567890", "2345678901", "3456789012", "4567890123", "5678901234", "6789012345", "7890123456"};
+    std::string darkestSecrets[7] = {
+        "Loves pineapple on pizza",
+        "Afraid of spiders",
+        "Sleeps with night light",
+        "Sings in the shower",
+        "Can't whistle",
+        "Never learned to swim",
+        "Loves cheesy movies"
+    };
+
+    for (int i = 0; i < 7; ++i) {
+        Contact newContact;
+        newContact.setFirstName(firstNames[i]);
+        newContact.setLastName(lastNames[i]);
+        newContact.setNickName(nickNames[i]);
+        newContact.setPhoneNumber(phoneNumbers[i]);
+        newContact.setDarkestSecret(darkestSecrets[i]);
+
+        setContact(getIdx(), newContact);
+        updateContactsLen();
+    }
+}
+

@@ -38,6 +38,7 @@ void Contact::setDarkestSecret(const std::string& newDarkestSecret) {
 bool	Contact::validate_str(const std::string& str) const
 {
 	bool hasSpacesOnly = true;
+
 	if (str.empty())
 		return (false);
 	for (size_t i = 0; i < str.length(); ++i) {
