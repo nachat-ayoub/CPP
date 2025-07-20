@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include <iomanip>
 
 PhoneBook::PhoneBook() {
 	len = 0;
@@ -158,36 +159,3 @@ void	PhoneBook::searchContact() {
 	else
 		std::cout << "==========[ Contact not found ]==========" << std::endl << std::endl;
 }
-
-
-void PhoneBook::seedData() {
-    Contact newContact;
-
-    // Example data for 7 contacts
-    std::string firstNames[7] = {"Alice", "Bob", "Charlie", "David", "Eva", "Frank", "Grace"};
-    std::string lastNames[7] = {"Smith", "Johnson", "Brown", "Williams", "Jones", "Miller", "Davis"};
-    std::string nickNames[7] = {"Ally", "Bobby", "Chuck", "Dave", "Evie", "Franky", "Gray"};
-    std::string phoneNumbers[7] = {"1234567890", "2345678901", "3456789012", "4567890123", "5678901234", "6789012345", "7890123456"};
-    std::string darkestSecrets[7] = {
-        "Loves pineapple on pizza",
-        "Afraid of spiders",
-        "Sleeps with night light",
-        "Sings in the shower",
-        "Can't whistle",
-        "Never learned to swim",
-        "Loves cheesy movies"
-    };
-
-    for (int i = 0; i < 7; ++i) {
-        Contact newContact;
-        newContact.setFirstName(firstNames[i]);
-        newContact.setLastName(lastNames[i]);
-        newContact.setNickName(nickNames[i]);
-        newContact.setPhoneNumber(phoneNumbers[i]);
-        newContact.setDarkestSecret(darkestSecrets[i]);
-
-        setContact(getIdx(), newContact);
-        updateContactsLen();
-    }
-}
-

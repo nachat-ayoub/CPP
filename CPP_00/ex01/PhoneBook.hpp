@@ -1,8 +1,7 @@
 #ifndef PHONEBOOK_HPP
 #define PHONEBOOK_HPP
 
-#include "./Contact.hpp"
-#include <iomanip>
+#include "Contact.hpp"
 
 class PhoneBook
 {
@@ -29,8 +28,6 @@ class PhoneBook
 		int		validate_index();
 		void	printCell(const std::string& str) const;
 		void	printContact(Contact contact, int index) const;
-
-		void seedData();
 };
 
 #endif

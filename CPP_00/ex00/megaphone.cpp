@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 
 void	print_str(std::string str)
 {
@@ -26,8 +25,6 @@ int	main(int ac, char **av)
 	while (i < ac)
 	{
 		print_str(av[i]);
-		if (i < ac - 1)
-			std::cout << ' ';
 		i++;
 	}
 	std::cout << std::endl;

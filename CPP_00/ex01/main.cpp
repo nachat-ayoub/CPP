@@ -5,7 +5,6 @@ int main()
 	PhoneBook	phoneBook;
 	std::string	input;
 
-	phoneBook.seedData();
 	while (true)
 	{
 		std::cout << "Type a command ADD, SEARCH or EXIT" << std::endl;
