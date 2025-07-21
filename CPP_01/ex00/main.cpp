@@ -1,10 +1,9 @@
 #include "Zombie.hpp"
 #include "Zombie.h"
 
-int main (int ac, char **av)
+int main ()
 {
-	(void)ac;
-	Zombie *zombie = newZombie(av[1]);
-	(void)zombie;
-	randomChump(av[1]);
+	Zombie *zombie = newZombie("ZombieFromHeap");
+	delete zombie;
+	randomChump("ZombieFromStack");
 }
