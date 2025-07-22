@@ -35,6 +35,7 @@ int main(int ac, char **av)
 	std::ofstream openedOutFile((filename + ".replace").c_str());
 	if (!openedOutFile)
 	{
+		openedInFile.close();
 		std::cout << "Error opening the outfile\n";
 		return (1);
 	}
@@ -52,5 +53,8 @@ int main(int ac, char **av)
 		res += lineRead.substr(currPos);
 		openedOutFile << res;
 	}
+
+	openedInFile.close();
+	openedOutFile.close();
 	return (0);
 }
