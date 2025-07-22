@@ -1,4 +1,4 @@
-NAME      = zombie
+NAME      = fight
 
 CPPFLAGS  = -Wall -Wextra -Werror -std=c++98
 
